@@ -95,6 +95,9 @@ Mac); 7–8B models need about 16 GB, or `--load-in-4bit` on CUDA. Ollama serves
 quantised conversions: record that, and do not mix Ollama and `hf:` runs of "the same"
 model in one comparison.
 
+For planning: the instructor's reference — every command in the list below, on the test
+split, with a 3B target — took 73 minutes on one A40, 59 of them PAIR.
+
 **No GPU you can use?** The course has no shared GPU server. Email zehuac@korea.ac.kr at
 least one day before you want to start, and the instructor will open a JupyterLab with a
 GPU for you for 24 hours. It is paid for out of the instructor's own pocket: ask only if you
@@ -155,6 +158,11 @@ was scored, and it over-counts: polite refusals in unexpected wording, and nonse
 "succeed". `rubric` asks a second course model to read the request and the response. Your
 report gives both, explains the gap between them, and calibrates the one you rely on
 against your own 50 labels (`label.py`). Chapter 8.7.
+
+Use the largest rubric judge your hardware allows. A 3B judge misreads garbled output —
+the instructor's reference run caught Llama-3.2-3B calling decoded nonsense "harmful" — and
+a 7–8B judge (`qwen2.5-7b`, `llama3.1-8b`) is noticeably better. Either way, your 50 labels
+are what tell you how far to trust it.
 
 Two rules the harness enforces: a rubric judge may not be the model it is judging, and an
 encoded reply is judged after your `decode()`, not before. PAIR's in-loop judge is part of

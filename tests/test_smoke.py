@@ -121,7 +121,10 @@ class TestPipeline(Isolated):
         self.assertEqual([e["event"] for e in log], ["start", "finish"])
 
         import argparse
-        run.cmd_redecode(argparse.Namespace(run=str(d), helper=None, batch_size=8, load_in_4bit=False))
+        import contextlib
+        import io
+        with contextlib.redirect_stdout(io.StringIO()):
+            run.cmd_redecode(argparse.Namespace(run=str(d), helper=None, batch_size=8, load_in_4bit=False))
         self.assertEqual(records.read_judgements(d), {}, "redecode sets old judgements aside")
         self.assertTrue(any(p.name.endswith(".stale") for p in d.iterdir()))
 
