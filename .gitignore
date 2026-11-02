@@ -1,0 +1,8 @@
+out/
+data/*.jsonl
+data/manifest.json
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+*.zip
